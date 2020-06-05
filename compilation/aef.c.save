@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <string.h>
+
+int checkWord(char*);
+
+int main(void) {
+	char word[5];
+	printf("Donner une chaine de caractere\n");
+	scanf("%s",word);
+	int check = checkWord(word);
+	if(check ==0)
+		printf("Le mot ne respect pas le langage\n");
+	else
+		printf("Le mot respect le langage\n");
+	return 0;
+}
+
+int checkWord(char *word) {
+	int stat=1;
+	for(int i=0; i<strlen(word);i++){
+		switch(word[i]){
+			// Cette structure conditionnelle permet de controler l'agencement des lettres
+			case 'a':
+				if(stat==1 || stat == 2 || stat==4){
+					stat =2;
+					break;
+				} else { return 0;}
+			case 'b':
+				if(stat==2){
+					stat=3;
+					break;
+				} else { return 0;}
+			case 'c': 
+				if(stat==3){
+					stat = 4;
+					break;
+				} else { return 0;}
+			default:
+				printf("Caractère hors alphabet\n");
+				return 0;
+		}
+	}
+	if(stat == 2 || stat == 4)
+		return 1;
+}
